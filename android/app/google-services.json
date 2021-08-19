@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "316281331317",
+    "project_id": "bigoode-4f1db",
+    "storage_bucket": "bigoode-4f1db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316281331317:android:d5a679a2c57abdf4a2e23c",
+        "android_client_info": {
+          "package_name": "com.example.bigoode"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "316281331317-ou30ljfjl1mtcm88l0r4s4hsroc150qh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmx64eja2gSJvzlMiJ3LB9StE2ZxFPy_Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "316281331317-ou30ljfjl1mtcm88l0r4s4hsroc150qh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316281331317:android:3d7cada3acb6ee1da2e23c",
+        "android_client_info": {
+          "package_name": "fr.weeb_studio.bigoodee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "316281331317-ou30ljfjl1mtcm88l0r4s4hsroc150qh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmx64eja2gSJvzlMiJ3LB9StE2ZxFPy_Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "316281331317-ou30ljfjl1mtcm88l0r4s4hsroc150qh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
