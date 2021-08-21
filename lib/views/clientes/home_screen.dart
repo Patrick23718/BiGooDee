@@ -23,8 +23,8 @@ class _HomeClientState extends State<HomeClient> {
     // TODO: implement initState
     super.initState();
     user = _userServices.getUser();
-    // if(user == null){
-    //   Navigator.push(context, MaterialPageRoute(builder: (context) => ConnexionScreen()));
+    // if (user == null) {
+    //   Get.offAllNamed('/connexion');
     // }
   }
 
@@ -145,468 +145,482 @@ class _HomeClientState extends State<HomeClient> {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(13.0),
-                              child: Container(
-                                width: double.infinity,
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      // height: width * 1.8,
-                                      width: double.infinity,
-                                      // margin: EdgeInsets.only(left: 10, right: 10),
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        border:
-                                            Border.all(color: kTextOnlyColor),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: InkWell(
-                                        onTap: () {
-                                          Get.defaultDialog(
-                                              title: '',
-                                              titlePadding: EdgeInsets.all(0),
-                                              content: Column(
-                                                children: [
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                    children: [
-                                                      Text(
-                                                        'Type de prestation',
-                                                        style: TextStyle(
-                                                            fontSize:
-                                                                textRegularH2,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w500),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 40,
-                                                      ),
-                                                      IconButton(
-                                                        onPressed: () =>
-                                                            Get.back(),
-                                                        icon: SvgPicture.asset(
-                                                            'icons/close.svg'),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                  InputPrestation(
-                                                    text: 'Braids',
-                                                  ),
-                                                  SizedBox(
-                                                    height: inputInterligne,
-                                                  ),
-                                                  InputPrestation(
-                                                      text:
-                                                          'Vanilles (twists)'),
-                                                  SizedBox(
-                                                    height: inputInterligne,
-                                                  ),
-                                                  InputPrestation(
-                                                      text: 'Tissages'),
-                                                  SizedBox(
-                                                    height: inputInterligne,
-                                                  ),
-                                                  InputPrestation(
-                                                      text: 'Nattes colléss'),
-                                                  SizedBox(
-                                                    height: inputInterligne,
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 10),
-                                                    child: SizedBox(
-                                                      width: double.infinity,
-                                                      height: buttonHeight,
-                                                      child: FlatButton(
-                                                        child: Text(
-                                                          'valider'
-                                                              .toUpperCase(),
-                                                          style: TextStyle(
-                                                              color:
-                                                                  kSecondaryColor,
-                                                              fontSize: 16),
-                                                        ),
-                                                        color: kPrimaryColor,
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                        ),
-                                                        onPressed: () {
-                                                          Get.back();
-                                                          //  Navigator.push(context, MaterialPageRoute(builder: (context) => Acceuil()));
-                                                        },
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ));
-                                        },
-                                        highlightColor:
-                                            kPrimaryColor.withOpacity(0.2),
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: <Widget>[
-                                                  SvgPicture.asset(
-                                                      'icons/map.svg'),
-                                                  SizedBox(
-                                                    width: 15,
-                                                  ),
-                                                  Text(
-                                                    'Type de prestation',
-                                                    style: TextStyle(
-                                                      fontSize: textRegularP1,
-                                                      color: kTextOnlyColor,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Container(
-                                                  // padding: ,
-                                                  child: SvgPicture.asset(
-                                                      'icons/Vector.svg'))
-                                            ],
-                                          ),
+                              child: SingleChildScrollView(
+                                child: Container(
+                                  width: double.infinity,
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        // height: width * 1.8,
+                                        width: double.infinity,
+                                        // margin: EdgeInsets.only(left: 10, right: 10),
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: kTextOnlyColor),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                         ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Container(
-                                      // height: width * 1.8,
-                                      width: double.infinity,
-                                      // margin: EdgeInsets.only(left: 10, right: 10),
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        border:
-                                            Border.all(color: kTextOnlyColor),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: InkWell(
-                                        onTap: () {
-                                          Get.defaultDialog(
-                                              title: '',
-                                              titlePadding: EdgeInsets.all(0),
-                                              content: Column(
-                                                children: [
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                    children: [
-                                                      Text(
-                                                        'Type de prestation',
-                                                        style: TextStyle(
-                                                            fontSize:
-                                                                textRegularH2,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w500),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 40,
-                                                      ),
-                                                      IconButton(
-                                                        onPressed: () =>
-                                                            Get.back(),
-                                                        icon: SvgPicture.asset(
-                                                            'icons/close.svg'),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                  InputPrestation(
-                                                    text: 'Braids',
-                                                  ),
-                                                  SizedBox(
-                                                    height: inputInterligne,
-                                                  ),
-                                                  InputPrestation(
-                                                      text:
-                                                          'Vanilles (twists)'),
-                                                  SizedBox(
-                                                    height: inputInterligne,
-                                                  ),
-                                                  InputPrestation(
-                                                      text: 'Tissages'),
-                                                  SizedBox(
-                                                    height: inputInterligne,
-                                                  ),
-                                                  InputPrestation(
-                                                      text: 'Nattes colléss'),
-                                                  SizedBox(
-                                                    height: inputInterligne,
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 10),
-                                                    child: SizedBox(
-                                                      width: double.infinity,
-                                                      height: buttonHeight,
-                                                      child: FlatButton(
-                                                        child: Text(
-                                                          'valider'
-                                                              .toUpperCase(),
+                                        child: InkWell(
+                                          onTap: () {
+                                            Get.defaultDialog(
+                                                title: '',
+                                                titlePadding: EdgeInsets.all(0),
+                                                content: Column(
+                                                  children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        SizedBox(
+                                                          width: 20,
+                                                        ),
+                                                        Text(
+                                                          'Type de prestation',
                                                           style: TextStyle(
-                                                              color:
-                                                                  kSecondaryColor,
-                                                              fontSize: 16),
+                                                              fontSize:
+                                                                  textRegularH2,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
                                                         ),
-                                                        color: kPrimaryColor,
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
+                                                        IconButton(
+                                                          onPressed: () =>
+                                                              Get.back(),
+                                                          icon: SvgPicture.asset(
+                                                              'icons/close.svg'),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    InputPrestation(
+                                                      text: 'Braids',
+                                                    ),
+                                                    SizedBox(
+                                                      height: inputInterligne,
+                                                    ),
+                                                    InputPrestation(
+                                                        text:
+                                                            'Vanilles (twists)'),
+                                                    SizedBox(
+                                                      height: inputInterligne,
+                                                    ),
+                                                    InputPrestation(
+                                                        text: 'Tissages'),
+                                                    SizedBox(
+                                                      height: inputInterligne,
+                                                    ),
+                                                    InputPrestation(
+                                                        text: 'Nattes colléss'),
+                                                    SizedBox(
+                                                      height: inputInterligne,
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 10),
+                                                      child: SizedBox(
+                                                        width: double.infinity,
+                                                        height: buttonHeight,
+                                                        child: FlatButton(
+                                                          child: Text(
+                                                            'valider'
+                                                                .toUpperCase(),
+                                                            style: TextStyle(
+                                                                color:
+                                                                    kSecondaryColor,
+                                                                fontSize: 16),
+                                                          ),
+                                                          color: kPrimaryColor,
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                          ),
+                                                          onPressed: () {
+                                                            Get.back();
+                                                            //  Navigator.push(context, MaterialPageRoute(builder: (context) => Acceuil()));
+                                                          },
                                                         ),
-                                                        onPressed: () {
-                                                          Get.back();
-                                                          //  Navigator.push(context, MaterialPageRoute(builder: (context) => Acceuil()));
-                                                        },
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ));
-                                        },
-                                        highlightColor:
-                                            kPrimaryColor.withOpacity(0.2),
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: <Widget>[
-                                                  SvgPicture.asset(
-                                                    'icons/hair.svg',
-                                                    width: 20,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 15,
-                                                  ),
-                                                  Text(
-                                                    'Type de prestation',
-                                                    style: TextStyle(
-                                                      fontSize: textRegularP1,
-                                                      color: kTextOnlyColor,
+                                                  ],
+                                                ));
+                                          },
+                                          highlightColor:
+                                              kPrimaryColor.withOpacity(0.2),
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 10),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Row(
+                                                  children: <Widget>[
+                                                    SvgPicture.asset(
+                                                        'icons/map.svg'),
+                                                    SizedBox(
+                                                      width: 15,
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Container(
-                                                  // padding: ,
-                                                  child: SvgPicture.asset(
-                                                      'icons/Vector.svg'))
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Container(
-                                      // height: width * 1.8,
-                                      width: double.infinity,
-                                      // margin: EdgeInsets.only(left: 10, right: 10),
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        border:
-                                            Border.all(color: kTextOnlyColor),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: InkWell(
-                                        onTap: () {
-                                          Get.defaultDialog(
-                                              title: '',
-                                              titlePadding: EdgeInsets.all(0),
-                                              content: Column(
-                                                children: [
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                    children: [
-                                                      Text(
-                                                        'Type de prestation',
-                                                        style: TextStyle(
-                                                            fontSize:
-                                                                textRegularH2,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w500),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 40,
-                                                      ),
-                                                      IconButton(
-                                                        onPressed: () =>
-                                                            Get.back(),
-                                                        icon: SvgPicture.asset(
-                                                            'icons/close.svg'),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                  InputPrestation(
-                                                    text: 'Braids',
-                                                  ),
-                                                  SizedBox(
-                                                    height: inputInterligne,
-                                                  ),
-                                                  InputPrestation(
-                                                      text:
-                                                          'Vanilles (twists)'),
-                                                  SizedBox(
-                                                    height: inputInterligne,
-                                                  ),
-                                                  InputPrestation(
-                                                      text: 'Tissages'),
-                                                  SizedBox(
-                                                    height: inputInterligne,
-                                                  ),
-                                                  InputPrestation(
-                                                      text: 'Nattes colléss'),
-                                                  SizedBox(
-                                                    height: inputInterligne,
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 10),
-                                                    child: SizedBox(
-                                                      width: double.infinity,
-                                                      height: buttonHeight,
-                                                      child: FlatButton(
-                                                        child: Text(
-                                                          'valider'
-                                                              .toUpperCase(),
-                                                          style: TextStyle(
-                                                              color:
-                                                                  kSecondaryColor,
-                                                              fontSize: 16),
-                                                        ),
-                                                        color: kPrimaryColor,
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                        ),
-                                                        onPressed: () {
-                                                          Get.back();
-                                                          //  Navigator.push(context, MaterialPageRoute(builder: (context) => Acceuil()));
-                                                        },
+                                                    Text(
+                                                      'Choix de la ville',
+                                                      style: TextStyle(
+                                                        fontSize: textRegularP1,
+                                                        color: kTextOnlyColor,
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ));
-                                        },
-                                        highlightColor:
-                                            kPrimaryColor.withOpacity(0.2),
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: <Widget>[
-                                                  SvgPicture.asset(
-                                                    'icons/calandar.svg',
-                                                    width: 20,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 15,
-                                                  ),
-                                                  Text(
-                                                    'Type de prestation',
-                                                    style: TextStyle(
-                                                      fontSize: textRegularP1,
-                                                      color: kTextOnlyColor,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Container(
-                                                  // padding: ,
-                                                  child: SvgPicture.asset(
-                                                      'icons/Vector.svg'))
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10),
-                                      child: Center(
-                                        child: SizedBox(
-                                          width: double.infinity,
-                                          height: buttonHeight,
-                                          child: FlatButton(
-                                            child: Text(
-                                              'valider'.toUpperCase(),
-                                              style: TextStyle(
-                                                  color: kSecondaryColor,
-                                                  fontSize: 16),
+                                                  ],
+                                                ),
+                                                Container(
+                                                    // padding: ,
+                                                    child: SvgPicture.asset(
+                                                        'icons/Vector.svg'))
+                                              ],
                                             ),
-                                            color: kPrimaryColor,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                            onPressed: () {
-                                              Get.offNamed(
-                                                  '/coiffeuse/addprestations');
-                                              //  Navigator.push(context, MaterialPageRoute(builder: (context) => Acceuil()));
-                                            },
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                // child: Wrap(
-                                //   alignment: WrapAlignment.spaceAround,
-                                //   children: [
-                                //     // Column(
-                                //     //   children: [
+                                      SizedBox(height: 10),
+                                      Container(
+                                        // height: width * 1.8,
+                                        width: double.infinity,
+                                        // margin: EdgeInsets.only(left: 10, right: 10),
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: kTextOnlyColor),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: InkWell(
+                                          onTap: () {
+                                            Get.defaultDialog(
+                                                title: '',
+                                                titlePadding: EdgeInsets.all(0),
+                                                content: Column(
+                                                  children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        SizedBox(
+                                                          width: 20,
+                                                        ),
+                                                        Text(
+                                                          'Type de prestation',
+                                                          style: TextStyle(
+                                                              fontSize:
+                                                                  textRegularH2,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                        ),
+                                                        IconButton(
+                                                          onPressed: () =>
+                                                              Get.back(),
+                                                          icon: SvgPicture.asset(
+                                                              'icons/close.svg'),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    InputPrestation(
+                                                      text: 'Braids',
+                                                    ),
+                                                    SizedBox(
+                                                      height: inputInterligne,
+                                                    ),
+                                                    InputPrestation(
+                                                        text:
+                                                            'Vanilles (twists)'),
+                                                    SizedBox(
+                                                      height: inputInterligne,
+                                                    ),
+                                                    InputPrestation(
+                                                        text: 'Tissages'),
+                                                    SizedBox(
+                                                      height: inputInterligne,
+                                                    ),
+                                                    InputPrestation(
+                                                        text: 'Nattes colléss'),
+                                                    SizedBox(
+                                                      height: inputInterligne,
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 10),
+                                                      child: SizedBox(
+                                                        width: double.infinity,
+                                                        height: buttonHeight,
+                                                        child: FlatButton(
+                                                          child: Text(
+                                                            'valider'
+                                                                .toUpperCase(),
+                                                            style: TextStyle(
+                                                                color:
+                                                                    kSecondaryColor,
+                                                                fontSize: 16),
+                                                          ),
+                                                          color: kPrimaryColor,
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                          ),
+                                                          onPressed: () {
+                                                            Get.back();
+                                                            //  Navigator.push(context, MaterialPageRoute(builder: (context) => Acceuil()));
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ));
+                                          },
+                                          highlightColor:
+                                              kPrimaryColor.withOpacity(0.2),
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 10),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Row(
+                                                  children: <Widget>[
+                                                    SvgPicture.asset(
+                                                      'icons/hair.svg',
+                                                      width: 20,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 15,
+                                                    ),
+                                                    Text(
+                                                      'Type de prestation',
+                                                      style: TextStyle(
+                                                        fontSize: textRegularP1,
+                                                        color: kTextOnlyColor,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Container(
+                                                    // padding: ,
+                                                    child: SvgPicture.asset(
+                                                        'icons/Vector.svg'))
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Container(
+                                        // height: width * 1.8,
+                                        width: double.infinity,
+                                        // margin: EdgeInsets.only(left: 10, right: 10),
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: kTextOnlyColor),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: InkWell(
+                                          onTap: () {
+                                            Get.defaultDialog(
+                                                title: '',
+                                                titlePadding: EdgeInsets.all(0),
+                                                content: Column(
+                                                  children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        SizedBox(
+                                                          width: 20,
+                                                        ),
+                                                        Text(
+                                                          'Type de prestation',
+                                                          style: TextStyle(
+                                                              fontSize:
+                                                                  textRegularH2,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                        ),
+                                                        IconButton(
+                                                          onPressed: () =>
+                                                              Get.back(),
+                                                          icon: SvgPicture.asset(
+                                                              'icons/close.svg'),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    InputPrestation(
+                                                      text: 'Braids',
+                                                    ),
+                                                    SizedBox(
+                                                      height: inputInterligne,
+                                                    ),
+                                                    InputPrestation(
+                                                        text:
+                                                            'Vanilles (twists)'),
+                                                    SizedBox(
+                                                      height: inputInterligne,
+                                                    ),
+                                                    InputPrestation(
+                                                        text: 'Tissages'),
+                                                    SizedBox(
+                                                      height: inputInterligne,
+                                                    ),
+                                                    InputPrestation(
+                                                        text: 'Nattes colléss'),
+                                                    SizedBox(
+                                                      height: inputInterligne,
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          vertical: 10),
+                                                      child: SizedBox(
+                                                        width: double.infinity,
+                                                        height: buttonHeight,
+                                                        child: FlatButton(
+                                                          child: Text(
+                                                            'valider'
+                                                                .toUpperCase(),
+                                                            style: TextStyle(
+                                                                color:
+                                                                    kSecondaryColor,
+                                                                fontSize: 16),
+                                                          ),
+                                                          color: kPrimaryColor,
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                          ),
+                                                          onPressed: () {
+                                                            Get.back();
+                                                            //  Navigator.push(context, MaterialPageRoute(builder: (context) => Acceuil()));
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ));
+                                          },
+                                          highlightColor:
+                                              kPrimaryColor.withOpacity(0.2),
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 10),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Row(
+                                                  children: <Widget>[
+                                                    SvgPicture.asset(
+                                                      'icons/calandar.svg',
+                                                      width: 20,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 15,
+                                                    ),
+                                                    Text(
+                                                      'Choix de votre date',
+                                                      style: TextStyle(
+                                                        fontSize: textRegularP1,
+                                                        color: kTextOnlyColor,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Container(
+                                                    // padding: ,
+                                                    child: SvgPicture.asset(
+                                                        'icons/Vector.svg'))
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10),
+                                        child: Center(
+                                          child: SizedBox(
+                                            width: double.infinity,
+                                            height: buttonHeight,
+                                            child: FlatButton(
+                                              child: Text(
+                                                'rechercher'.toUpperCase(),
+                                                style: TextStyle(
+                                                    color: kSecondaryColor,
+                                                    fontSize: 16),
+                                              ),
+                                              color: kPrimaryColor,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              onPressed: () {
+                                                Get.offNamed(
+                                                    '/coiffeuse/addprestations');
+                                                //  Navigator.push(context, MaterialPageRoute(builder: (context) => Acceuil()));
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  // child: Wrap(
+                                  //   alignment: WrapAlignment.spaceAround,
+                                  //   children: [
+                                  //     // Column(
+                                  //     //   children: [
 
-                                //     //     Image.asset('assets/images/coiffeuse_1.png', height: double.infinity/1.7, fit: BoxFit.contain,)
-                                //     //   ],
-                                //     // ),
-                                //     Text("data je suis"),
-                                //     Text("data je suis"),
-                                //     Text("data je suis"),
-                                //     Text("data je suis"),
-                                //     Text("data je suis"),
-                                //     Text("data je suis"),
-                                //     Text("data je suis"),
-                                //   ],
-                                // ),
+                                  //     //     Image.asset('assets/images/coiffeuse_1.png', height: double.infinity/1.7, fit: BoxFit.contain,)
+                                  //     //   ],
+                                  //     // ),
+                                  //     Text("data je suis"),
+                                  //     Text("data je suis"),
+                                  //     Text("data je suis"),
+                                  //     Text("data je suis"),
+                                  //     Text("data je suis"),
+                                  //     Text("data je suis"),
+                                  //     Text("data je suis"),
+                                  //   ],
+                                  // ),
+                                ),
                               ),
                             )
                           ],

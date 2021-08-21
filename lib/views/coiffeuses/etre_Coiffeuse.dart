@@ -67,7 +67,8 @@ class EtreCoiffeuse extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             onPressed: () {
-                              Get.offNamed(/*'/coiffeuse/home'*/ '/creation');
+                              Get.offNamed(
+                                  /*'/coiffeuse/home'*/ '/creation-coiffeuse');
                               //  Navigator.push(context, MaterialPageRoute(builder: (context) => Acceuil()));
                             },
                           ),

@@ -28,7 +28,8 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
   UserServices _userServices = UserServices();
   bool isSignIn = false;
   FirebaseAuth _auth = FirebaseAuth.instance;
-  late User _user;
+  late User _user, users;
+  late String role;
   // FacebookLogin facebookLogin = FacebookLogin();
 
   @override
@@ -304,13 +305,19 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                                             _emailController.text,
                                             _passController.text);
                                         _userServices.getUser();
-                                        if (user == 'ok') {
+                                        if (user.split(' ')[0] == 'ok') {
+                                          setState(() => {
+                                                role = _userServices
+                                                    .getRole(user.split(' ')[1])
+                                                    .toString(),
+                                              });
+                                          print('roles is $role');
+                                          if (role == "client") {
+                                            Get.offAllNamed('/cliente/accueil');
+                                          } else if (role == 'coiffeuse') {
+                                            Get.offAllNamed('/coiffeuse/home');
+                                          }
                                           Get.back();
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      AccueilCoffeuse()));
                                         } else {
                                           var translation =
                                               await GoogleTranslator()

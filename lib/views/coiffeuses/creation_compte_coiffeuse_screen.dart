@@ -1,6 +1,7 @@
 import 'package:bigoodee/constants.dart';
 import 'package:bigoodee/services/userServices.dart';
 import 'package:bigoodee/views/coiffeuses/home_coiffeuse.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:translator/translator.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,29 +9,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class CreationCompteScreen extends StatefulWidget {
-  const CreationCompteScreen({Key? key}) : super(key: key);
+class CreationCompteCoiffeuseScreen extends StatefulWidget {
+  const CreationCompteCoiffeuseScreen({Key? key}) : super(key: key);
 
   @override
-  _CreationCompteScreenState createState() => _CreationCompteScreenState();
+  _CreationCompteCoiffeuseScreenState createState() =>
+      _CreationCompteCoiffeuseScreenState();
 }
 
-class _CreationCompteScreenState extends State<CreationCompteScreen> {
-  late FocusNode myFocusNod, FNTel, FNMail, FNPass;
+class _CreationCompteCoiffeuseScreenState
+    extends State<CreationCompteCoiffeuseScreen> {
+  late FocusNode myFocusNod, FNTel, FNMail, FNPass, FNPrenom, FNVille;
   late FocusNode myTelFocusNode;
 
   UserServices _userServices = UserServices();
-  User? user;
+  // User? user;
 
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
   final _nomController = TextEditingController();
   final _telController = TextEditingController();
+  final _villeController = TextEditingController();
+  final _prenomController = TextEditingController();
 
   @override
   void initState() {
     // // TODO: implement initState
-    // super.initState();
+    super.initState();
     // user = _userServices.getUser();
     // if (user == null) {
     //   //Navigator.push(context, MaterialPageRoute(builder: (context) => ConnexionScreen()));
@@ -43,6 +48,8 @@ class _CreationCompteScreenState extends State<CreationCompteScreen> {
     FNTel = FocusNode();
     FNMail = FocusNode();
     FNPass = FocusNode();
+    FNPrenom = FocusNode();
+    FNVille = FocusNode();
   }
 
   @override
@@ -51,6 +58,8 @@ class _CreationCompteScreenState extends State<CreationCompteScreen> {
     _passController.dispose();
     _nomController.dispose();
     _telController.dispose();
+    _villeController.dispose();
+    _prenomController.dispose();
     myTelFocusNode.dispose();
     myFocusNod.dispose();
     FNTel.dispose();
@@ -84,12 +93,24 @@ class _CreationCompteScreenState extends State<CreationCompteScreen> {
     });
   }
 
+  void _requestFocusPrenom() {
+    setState(() {
+      FocusScope.of(context).requestFocus(FNPrenom);
+    });
+  }
+
+  void _requestFocusVille() {
+    setState(() {
+      FocusScope.of(context).requestFocus(FNVille);
+    });
+  }
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool _secureText = true;
   @override
   Widget build(BuildContext context) {
-    late FocusScope scope;
+    double width = MediaQuery.of(context).size.width / 12;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -97,17 +118,16 @@ class _CreationCompteScreenState extends State<CreationCompteScreen> {
             toolbarHeight: 100,
             centerTitle: true,
             title: Text(
-              'Renseigner mon compte',
+              'Dites nous en plus sur vous',
               style: headingStyle,
+              textAlign: TextAlign.center,
+              maxLines: 2,
             ),
             leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-                size: textMediumH1,
-              ),
+              icon: SvgPicture.asset('icons/back.svg'),
               onPressed: () {
-                Navigator.of(context).pop();
+                Get.back();
+                // Navigator.of(context).pop();
               },
             ),
             backgroundColor: Colors.transparent,
@@ -117,15 +137,28 @@ class _CreationCompteScreenState extends State<CreationCompteScreen> {
           body: SingleChildScrollView(
               // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               child: Padding(
-                  padding: EdgeInsets.all(defaultPadding),
+                  padding: EdgeInsets.only(
+                      top: 0,
+                      left: defaultPadding,
+                      bottom: defaultPadding,
+                      right: defaultPadding),
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        Container(
+                          width: double.infinity,
+                          child: Text(
+                            "étape 1/2",
+                            style: subHeadingStyle,
+                            textAlign: TextAlign.right,
+                          ),
+                        ),
+                        SizedBox(height: 10),
                         Text(
                           "Afin de compléter votre compte, merci de renseigner les informations suivantes: ",
                           style: subHeadingStyle,
                         ),
-                        SizedBox(height: 60),
+                        SizedBox(height: 20),
                         Form(
                           key: _formKey,
                           child: Column(
@@ -164,6 +197,83 @@ class _CreationCompteScreenState extends State<CreationCompteScreen> {
                                 validator: (String? value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Veuillez renseigner votre nom';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              SizedBox(height: 20),
+
+                              TextFormField(
+                                controller: _prenomController,
+                                focusNode: FNPrenom,
+                                onTap: _requestFocusPrenom,
+                                cursorColor: kTextColor,
+                                style: TextStyle(
+                                  color: kTextColor,
+                                ),
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: kPrimaryColor, width: 1.0)),
+                                  labelText: 'Prénom',
+                                  hintText: 'Prénom',
+                                  labelStyle: TextStyle(
+                                      color: FNPrenom.hasFocus
+                                          ? kPrimaryColor
+                                          : kTextOnlyColor //FocusScope.of(context).hasFocus ? kPrimaryColor : kTextOnlyColor
+                                      ),
+                                  hintStyle: TextStyle(
+                                    fontSize: textRegularP1,
+                                    color: kTextOnlyColor,
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                ),
+                                validator: (String? value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Veuillez renseigner votre prénom';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              SizedBox(height: 20),
+                              TextFormField(
+                                controller: _villeController,
+                                focusNode: FNVille,
+                                onTap: _requestFocusVille,
+                                cursorColor: kTextColor,
+                                style: TextStyle(
+                                  color: kTextColor,
+                                ),
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: kPrimaryColor, width: 1.0)),
+                                  labelText: 'Ville',
+                                  hintText: 'Ville',
+                                  labelStyle: TextStyle(
+                                      color: FNVille.hasFocus
+                                          ? kPrimaryColor
+                                          : kTextOnlyColor //FocusScope.of(context).hasFocus ? kPrimaryColor : kTextOnlyColor
+                                      ),
+                                  hintStyle: TextStyle(
+                                    fontSize: textRegularP1,
+                                    color: kTextOnlyColor,
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                  ),
+                                ),
+                                validator: (String? value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Veuillez renseigner votre ville';
                                   }
                                   return null;
                                 },
@@ -303,10 +413,10 @@ class _CreationCompteScreenState extends State<CreationCompteScreen> {
                                     const EdgeInsets.symmetric(vertical: 10),
                                 child: SizedBox(
                                   // height: 50,
-                                  width: double.infinity,
+                                  width: width * 8,
                                   child: FlatButton(
                                       child: Text(
-                                        'VALIDER',
+                                        'continuer'.toUpperCase(),
                                         style: TextStyle(
                                             color: kSecondaryColor,
                                             fontSize: 16),
@@ -319,68 +429,9 @@ class _CreationCompteScreenState extends State<CreationCompteScreen> {
                                         // Validate will return true if the form is valid, or false if
                                         // the form is invalid.
                                         if (_formKey.currentState!.validate()) {
-                                          Get.defaultDialog(
-                                              barrierDismissible: false,
-                                              title: '',
-                                              backgroundColor: kSecondaryColor
-                                                  .withOpacity(0.5),
-                                              content:
-                                                  CircularProgressIndicator(
-                                                color: kPrimaryColor,
-                                              ));
-                                          String? data = await _userServices
-                                              .createSomeUSer(
-                                                  _nomController.text,
-                                                  _telController.text,
-                                                  _emailController.text,
-                                                  _passController.text,
-                                                  "client",
-                                                  '',
-                                                  '');
-                                          print(data);
-                                          if (data != "ok") {
-                                            var translation =
-                                                await GoogleTranslator()
-                                                    .translate(data,
-                                                        from: 'en', to: 'fr');
+                                          Get.toNamed(
+                                              '/biographie?nom=${_nomController.text}&prenom=${_prenomController.text}&ville=${_villeController.text}&mail=${_emailController.text}&tel=${_telController.text}&pass=${_passController.text}'); //(context, MaterialPageRoute(builder: (context) => ConfirmCompescreen()));
 
-                                            Get.back();
-                                            Get.snackbar(
-                                                'Validation', translation.text,
-                                                animationDuration:
-                                                    Duration(seconds: 3),
-                                                colorText: kSecondaryColor,
-                                                backgroundColor:
-                                                    kErrorAlertColor
-                                                        .withOpacity(0.4));
-                                            // showDialog(
-                                            //     context: context,
-                                            //     barrierColor: kPrimaryColor
-                                            //         .withOpacity(0.2),
-                                            //     builder: (context) {
-                                            //       return AlertDialog(
-                                            //         content: Text(data,
-                                            //             textAlign:
-                                            //                 TextAlign.center,
-                                            //             style: normalStyle),
-                                            //         actions: [
-                                            //           TextButton(
-                                            //               onPressed: () {
-                                            //                 Navigator.of(
-                                            //                         context)
-                                            //                     .pop();
-                                            //               },
-                                            //               child: Text(
-                                            //                 'ok'.toUpperCase(),
-                                            //                 style: normalStyle,
-                                            //               ))
-                                            //         ],
-                                            //       );
-                                            // });
-                                          } else {
-                                            Get.offAllNamed(
-                                                '/cliente/confirm'); //(context, MaterialPageRoute(builder: (context) => ConfirmCompescreen()));
-                                          }
                                         }
                                       }),
                                 ),

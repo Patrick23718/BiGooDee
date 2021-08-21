@@ -73,6 +73,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           //   shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
                           // ),
                           onPressed: () {
+                            Get.toNamed('/creation');
                             // Navigator.push(context, MaterialPageRoute(builder: (context) => CreationCompteScreen()));
                           },
                           // color: Colors.transparent,

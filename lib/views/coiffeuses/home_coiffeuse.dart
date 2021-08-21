@@ -10,7 +10,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class AccueilCoffeuse extends StatelessWidget {
+class AccueilCoffeuse extends StatefulWidget {
+  @override
+  _AccueilCoffeuseState createState() => _AccueilCoffeuseState();
+}
+
+class _AccueilCoffeuseState extends State<AccueilCoffeuse> {
+  UserServices _userServices = UserServices();
+
+  User? user;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    user = _userServices.getUser();
+    // if (user == null) {
+    //   Get.offAllNamed('/connexion');
+    // }
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width / 12;
@@ -77,7 +96,7 @@ class AccueilCoffeuse extends StatelessWidget {
             ),
             Center(
               child: Text(
-                'Bonjour Danielle,',
+                'Bonjour ${user!.displayName!.split('%')[1].split(' ')[0]},',
                 style: headingStyle,
                 textAlign: TextAlign.center,
               ),

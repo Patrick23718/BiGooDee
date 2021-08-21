@@ -6,7 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class PrestationScreen extends StatelessWidget {
-  const PrestationScreen({Key? key}) : super(key: key);
+  final String? test;
+  const PrestationScreen({Key? key, this.test}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

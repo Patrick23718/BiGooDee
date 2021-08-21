@@ -68,6 +68,16 @@ class UserServices {
     return message;
   }
 
+  Future<String> getRole(id) async {
+    String url = apiURL + "/api/Users/role/" + id;
+    String res = "";
+    print(url.toString());
+    var response = await http.get(Uri.parse(url));
+    res = response.body.toString();
+    print(res);
+    return res;
+  }
+
   Future<String> auth(email, password) async {
     // var email = "noukimi.patrick@gmail.com";
     // var password = "test1234";
@@ -76,8 +86,9 @@ class UserServices {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
 
-      print("Les credentials sont $userCredential");
-      test = "ok";
+      // print("Les credentials sont $userCredential");
+
+      test = "ok " + userCredential.user!.uid;
     } on FirebaseAuthException catch (err) {
       // print("Les erreurs: $err");
       test = err.message!;
