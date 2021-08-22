@@ -4,36 +4,41 @@ import 'package:bigoodee/views/coiffeuses/home_coiffeuse.dart';
 import 'package:bigoodee/views/connexion_screen.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:translator/translator.dart';
 
-class InscriptionScreen extends StatefulWidget {
-  const InscriptionScreen({Key? key}) : super(key: key);
+class RegisterCoiffeuseScreen extends StatefulWidget {
+  const RegisterCoiffeuseScreen({Key? key}) : super(key: key);
 
   @override
-  _InscriptionScreenState createState() => _InscriptionScreenState();
+  _RegisterCoiffeuseScreenState createState() =>
+      _RegisterCoiffeuseScreenState();
 }
 
-class _InscriptionScreenState extends State<InscriptionScreen> {
-  late FocusNode FNNom, FNTel, FNMail, FNPass, FNPassCon;
+class _RegisterCoiffeuseScreenState extends State<RegisterCoiffeuseScreen> {
+  late FocusNode FNVille, FNBiographie, FNNom, FNTel, FNMail, FNPass, FNPassCon;
 
   final _nomController = TextEditingController();
   final _telController = TextEditingController();
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
   final _passConController = TextEditingController();
+  final _villeController = TextEditingController();
+  final _biographieController = TextEditingController();
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
+
     FNMail = FocusNode();
     FNPass = FocusNode();
     FNPassCon = FocusNode();
     FNNom = FocusNode();
     FNTel = FocusNode();
+    FNVille = FocusNode();
+    FNBiographie = FocusNode();
+    super.initState();
   }
 
   @override
@@ -43,11 +48,25 @@ class _InscriptionScreenState extends State<InscriptionScreen> {
     FNPassCon.dispose();
     FNNom.dispose();
     FNTel.dispose();
+    FNVille.dispose();
+    FNBiographie.dispose();
     // TODO: implement dispose
     super.dispose();
   }
 
   UserServices _userServices = UserServices();
+
+  void _requestFocusVille() {
+    setState(() {
+      FocusScope.of(context).requestFocus(FNVille);
+    });
+  }
+
+  void _requestFocusBiographie() {
+    setState(() {
+      FocusScope.of(context).requestFocus(FNBiographie);
+    });
+  }
 
   void _requestFocusNom() {
     setState(() {
@@ -238,6 +257,60 @@ class _InscriptionScreenState extends State<InscriptionScreen> {
                               ),
                               SizedBox(height: 20),
                               TextFormField(
+                                controller: _villeController,
+                                focusNode: FNVille,
+                                onTap: _requestFocusVille,
+                                cursorColor: kTextColor,
+                                style: TextStyle(
+                                  color: kTextColor,
+                                ),
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: kPrimaryColor, width: 1.0)),
+                                    labelText: 'Ville',
+                                    hintText: 'Ville',
+                                    labelStyle: TextStyle(
+                                        color: FNVille.hasFocus
+                                            ? kPrimaryColor
+                                            : kTextOnlyColor //FocusScope.of(context).hasFocus ? kPrimaryColor : kTextOnlyColor
+                                        ),
+                                    hintStyle: TextStyle(
+                                      fontSize: textRegularP1,
+                                      color: kTextOnlyColor,
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                    ),
+                                    suffixIcon: Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: Material(
+                                        color: kPrimaryColor,
+                                        elevation: 2.0,
+                                        shadowColor: kPrimaryColor,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20)),
+                                        child: Icon(Icons.location_city,
+                                            size: 20, color: kSecondaryColor),
+                                      ),
+                                    ),
+                                    suffixIconConstraints: BoxConstraints(
+                                        minHeight: 35, minWidth: 45)
+                                    //child: Icon(Icons.alternate_email, size: 24, color: kSecondaryColor),
+
+                                    ),
+                                validator: (String? value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Veuillez renseigner votre ville';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              SizedBox(height: 20),
+                              TextFormField(
                                 controller: _emailController,
                                 keyboardType: TextInputType.emailAddress,
                                 focusNode: FNMail,
@@ -289,6 +362,62 @@ class _InscriptionScreenState extends State<InscriptionScreen> {
                                     return 'Veuillez renseigner votre email';
                                   } else if (!EmailValidator.validate(value)) {
                                     return 'entrez une adresse mail valide';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              SizedBox(height: 20),
+                              TextFormField(
+                                controller: _biographieController,
+                                focusNode: FNBiographie,
+                                onTap: _requestFocusBiographie,
+                                keyboardType: TextInputType.multiline,
+                                maxLines: 5,
+                                cursorColor: kTextColor,
+                                style: TextStyle(
+                                  color: kTextColor,
+                                ),
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: kPrimaryColor, width: 1.0)),
+                                    labelText: 'Biographie',
+                                    hintText: 'Biographie',
+                                    labelStyle: TextStyle(
+                                        color: FNBiographie.hasFocus
+                                            ? kPrimaryColor
+                                            : kTextOnlyColor //FocusScope.of(context).hasFocus ? kPrimaryColor : kTextOnlyColor
+                                        ),
+                                    hintStyle: TextStyle(
+                                      fontSize: textRegularP1,
+                                      color: kTextOnlyColor,
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                    ),
+                                    suffixIcon: Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: Material(
+                                        color: kPrimaryColor,
+                                        elevation: 2.0,
+                                        shadowColor: kPrimaryColor,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20)),
+                                        child: Icon(Icons.person,
+                                            size: 20, color: kSecondaryColor),
+                                      ),
+                                    ),
+                                    suffixIconConstraints: BoxConstraints(
+                                        minHeight: 35, minWidth: 45)
+                                    //child: Icon(Icons.alternate_email, size: 24, color: kSecondaryColor),
+
+                                    ),
+                                validator: (String? value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Veuillez renseigner votre Biographie';
                                   }
                                   return null;
                                 },
@@ -431,14 +560,14 @@ class _InscriptionScreenState extends State<InscriptionScreen> {
                               RichText(
                                   text: TextSpan(style: normalStyle, children: [
                                 TextSpan(
-                                    text: "S'inscrire comme coiffeuse",
+                                    text: "S'inscrire comme Cliente",
                                     style: TextStyle(
                                         decoration: TextDecoration.underline,
                                         color: kPrimaryColor,
                                         fontSize: 14),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
-                                        Get.toNamed('/coiffeuse/register');
+                                        Get.toNamed('/cliente/register');
                                       })
                               ])),
                               SizedBox(height: 30),
@@ -476,9 +605,9 @@ class _InscriptionScreenState extends State<InscriptionScreen> {
                                                 _telController.text,
                                                 _emailController.text,
                                                 _passController.text,
-                                                "client",
-                                                '',
-                                                '');
+                                                "coiffeuse",
+                                                _villeController.text,
+                                                _biographieController.text);
                                         print(data);
                                         if (data != "ok") {
                                           var translation =
@@ -520,7 +649,7 @@ class _InscriptionScreenState extends State<InscriptionScreen> {
                                           // });
                                         } else {
                                           Get.offAllNamed(
-                                              '/cliente/accueil'); //(context, MaterialPageRoute(builder: (context) => ConfirmCompescreen()));
+                                              '/coiffeuse/home'); //(context, MaterialPageRoute(builder: (context) => ConfirmCompescreen()));
                                         }
                                       }
                                     },

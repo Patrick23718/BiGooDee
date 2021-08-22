@@ -96,7 +96,7 @@ class _AccueilCoffeuseState extends State<AccueilCoffeuse> {
             ),
             Center(
               child: Text(
-                'Bonjour ${user!.displayName!.split('%')[1].split(' ')[0]},',
+                'Bonjour ${user!.displayName!.split('%')[0].split(' ')[0]},',
                 style: headingStyle,
                 textAlign: TextAlign.center,
               ),

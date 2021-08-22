@@ -131,6 +131,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                                 controller: _emailController,
                                 focusNode: FNMail,
                                 onTap: _requestFocusMail,
+                                keyboardType: TextInputType.emailAddress,
                                 cursorColor: kTextColor,
                                 style: TextStyle(
                                   color: kTextColor,
@@ -306,17 +307,18 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                                             _passController.text);
                                         _userServices.getUser();
                                         if (user.split(' ')[0] == 'ok') {
-                                          setState(() => {
-                                                role = _userServices
-                                                    .getRole(user.split(' ')[1])
-                                                    .toString(),
-                                              });
-                                          print('roles is $role');
-                                          if (role == "client") {
-                                            Get.offAllNamed('/cliente/accueil');
-                                          } else if (role == 'coiffeuse') {
-                                            Get.offAllNamed('/coiffeuse/home');
-                                          }
+                                          // setState(() => {
+                                          //       role = _userServices
+                                          //           .getRole(user.split(' ')[1])
+                                          //           .toString(),
+                                          //     });
+                                          // print('roles is $role');
+                                          // if (role == "client") {
+                                          //   Get.offAllNamed('/cliente/accueil');
+                                          // } else if (role == 'coiffeuse') {
+                                          //   Get.offAllNamed('/coiffeuse/home');
+                                          // }
+                                          Get.offAllNamed('/coiffeuse/home');
                                           Get.back();
                                         } else {
                                           var translation =

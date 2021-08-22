@@ -29,9 +29,9 @@ class _BiographieScreenState extends State<BiographieScreen> {
   void initState() {
     super.initState();
     myFocusNod = FocusNode();
-    this.nom = Get.parameters['nom'].toString() +
+    this.nom = Get.parameters['prenom'].toString() +
         '%' +
-        Get.parameters['prenom'].toString();
+        Get.parameters['nom'].toString();
     this.tel = Get.parameters['tel'].toString();
     this.mail = Get.parameters['mail'].toString();
     this.pass = Get.parameters['pass'].toString();

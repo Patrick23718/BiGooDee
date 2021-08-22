@@ -5,6 +5,8 @@ import 'package:bigoodee/views/clientes/confirmation_compte_screen.dart';
 import 'package:bigoodee/views/clientes/home_screen.dart';
 import 'package:bigoodee/views/coiffeuses/biographie_screen.dart';
 import 'package:bigoodee/views/coiffeuses/creation_compte_coiffeuse_screen.dart';
+import 'package:bigoodee/views/coiffeuses/register_coiffeuse_screen.dart';
+import 'package:bigoodee/views/inscription_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:bigoodee/views/coiffeuses/ajout_prestation.dart';
@@ -44,9 +46,9 @@ void main() async {
   } catch (err) {
     print('object err $err');
   }
-  user = _userServices.getUser();
+  // user = _userServices.getUser();
 
-  _userServices.getRole(user!.uid.toString());
+  // _userServices.getRole(user!.uid.toString());
   runApp(MyApp());
 }
 
@@ -73,10 +75,13 @@ class MyApp extends StatelessWidget {
           /*, transition: Transition.lf*/
         ),
         GetPage(name: '/cliente/confirm', page: () => ConfirmCompescreen()),
+        GetPage(name: '/cliente/register', page: () => InscriptionScreen()),
         GetPage(name: '/creation', page: () => CreationCompteScreen()),
         GetPage(
             name: '/creation-coiffeuse',
             page: () => CreationCompteCoiffeuseScreen()),
+        GetPage(
+            name: '/coiffeuse/register', page: () => RegisterCoiffeuseScreen()),
         GetPage(name: '/coiffeuse/home', page: () => AccueilCoffeuse()),
         GetPage(name: '/coiffeuse/planning', page: () => PlanningScreen()),
         GetPage(name: '/coiffeuse/message', page: () => DiscussionScreen()),
