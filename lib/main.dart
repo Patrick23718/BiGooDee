@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Bigoodee',
       debugShowCheckedModeBanner: false,
-      initialRoute: '/connexion',
+      initialRoute: '/',
       getPages: [
         GetPage(name: '/', page: () => onBoardingScreen()),
         GetPage(name: '/welcome', page: () => WelcomeScreen()),
