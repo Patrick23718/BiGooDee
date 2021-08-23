@@ -1,5 +1,6 @@
 import 'package:bigoodee/constants.dart';
 import 'package:bigoodee/services/userServices.dart';
+import 'package:bigoodee/views/coiffeuses/prestation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -114,7 +115,7 @@ class _BiographieScreenState extends State<BiographieScreen> {
                                 key: _formKey,
                                 child: Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                        CrossAxisAlignment.center,
                                     children: <Widget>[
                                       TextFormField(
                                         controller: _biographieController,
@@ -223,8 +224,15 @@ class _BiographieScreenState extends State<BiographieScreen> {
                                                                 .withOpacity(
                                                                     0.4));
                                                   } else {
-                                                    Get.offAllNamed(
-                                                        '/coiffeuse/home'); //(context, MaterialPageRoute(builder: (context) => ConfirmCompescreen()));
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              PrestationScreen(
+                                                                  test:
+                                                                      "start")),
+                                                    );
+                                                    //(context, MaterialPageRoute(builder: (context) => ConfirmCompescreen()));
                                                   }
                                                 }
                                               }),

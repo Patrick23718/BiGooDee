@@ -8,7 +8,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class AjoutPrestationScreen extends StatefulWidget {
-  const AjoutPrestationScreen({Key? key}) : super(key: key);
+  final String? test;
+  const AjoutPrestationScreen({Key? key, this.test}) : super(key: key);
 
   @override
   _AjoutPrestationScreenState createState() => _AjoutPrestationScreenState();

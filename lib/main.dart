@@ -1,4 +1,5 @@
 import 'package:bigoodee/constants.dart';
+import 'package:bigoodee/helpers/local_storage.dart';
 import 'package:bigoodee/services/userServices.dart';
 import 'package:bigoodee/theme.dart';
 import 'package:bigoodee/views/clientes/confirmation_compte_screen.dart';
@@ -6,6 +7,7 @@ import 'package:bigoodee/views/clientes/home_screen.dart';
 import 'package:bigoodee/views/coiffeuses/biographie_screen.dart';
 import 'package:bigoodee/views/coiffeuses/creation_compte_coiffeuse_screen.dart';
 import 'package:bigoodee/views/coiffeuses/register_coiffeuse_screen.dart';
+import 'package:bigoodee/views/coiffeuses/welcome_screen.dart';
 import 'package:bigoodee/views/inscription_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -28,24 +30,29 @@ import 'package:flutter/material.dart';
 import 'package:bigoodee/views/homepage.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+late int test;
+const String LOCAL_STEPPERS_COMPLETED = "initApp";
 UserServices _userServices = UserServices();
-final storage = GetStorage();
 
 User? user;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // MySharedPreferences local = MySharedPreferences.instance;
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setInt(LOCAL_STEPPERS_COMPLETED, 1);
+  test = prefs.getInt(LOCAL_STEPPERS_COMPLETED)!;
+  // MySharedPreferences();
+  // local.setIntegerValue(LOCAL_STEPPERS_COMPLETED, 1);
+  // test = await local.getIntegerValue(LOCAL_STEPPERS_COMPLETED);
+  print('les tests $test');
   await Firebase.initializeApp();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: kPrimaryColor,
     statusBarIconBrightness: Brightness.light,
   ));
-  try {
-    await GetStorage.init();
-  } catch (err) {
-    print('object err $err');
-  }
+
   // user = _userServices.getUser();
 
   // _userServices.getRole(user!.uid.toString());
@@ -59,7 +66,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Bigoodee',
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/coiffeuse/home',
       getPages: [
         GetPage(name: '/', page: () => onBoardingScreen()),
         GetPage(name: '/welcome', page: () => WelcomeScreen()),
@@ -82,6 +89,7 @@ class MyApp extends StatelessWidget {
             page: () => CreationCompteCoiffeuseScreen()),
         GetPage(
             name: '/coiffeuse/register', page: () => RegisterCoiffeuseScreen()),
+        GetPage(name: '/coiffeuse/getstarted', page: () => WelcomePageScreen()),
         GetPage(name: '/coiffeuse/home', page: () => AccueilCoffeuse()),
         GetPage(name: '/coiffeuse/planning', page: () => PlanningScreen()),
         GetPage(name: '/coiffeuse/message', page: () => DiscussionScreen()),

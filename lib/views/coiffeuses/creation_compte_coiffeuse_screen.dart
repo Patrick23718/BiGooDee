@@ -119,15 +119,18 @@ class _CreationCompteCoiffeuseScreenState
             centerTitle: true,
             title: Text(
               'Dites nous en plus sur vous',
-              style: headingStyle,
+              style: TextStyle(
+                fontSize: 20, //getProportionateScreenWidth(28),
+                fontWeight: FontWeight.bold,
+                color: kTextTitleColor,
+              ),
               textAlign: TextAlign.center,
-              maxLines: 2,
+              maxLines: 1,
             ),
             leading: IconButton(
               icon: SvgPicture.asset('icons/back.svg'),
               onPressed: () {
                 Get.back();
-                // Navigator.of(context).pop();
               },
             ),
             backgroundColor: Colors.transparent,
@@ -162,7 +165,7 @@ class _CreationCompteCoiffeuseScreenState
                         Form(
                           key: _formKey,
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               TextFormField(
                                 controller: _nomController,

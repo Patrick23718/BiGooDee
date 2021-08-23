@@ -1,6 +1,8 @@
 import 'package:bigoodee/constants.dart';
 import 'package:bigoodee/enums.dart';
 import 'package:bigoodee/helpers/coustom_bottom_nav_bar.dart';
+import 'package:bigoodee/views/coiffeuses/ajout_prestation.dart';
+import 'package:bigoodee/views/coiffeuses/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -8,7 +10,6 @@ import 'package:get/get.dart';
 class PrestationScreen extends StatelessWidget {
   final String? test;
   const PrestationScreen({Key? key, this.test}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width / 12;
@@ -28,35 +29,51 @@ class PrestationScreen extends StatelessWidget {
           },
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: SvgPicture.asset('icons/Bell.svg'))
+          test == "start"
+              ? Text("")
+              : IconButton(
+                  onPressed: () {}, icon: SvgPicture.asset('icons/Bell.svg'))
         ],
         backgroundColor: Colors.transparent,
         bottomOpacity: 0,
         elevation: 0,
       ),
-      bottomNavigationBar: CustomBottomNavBar(
-        selectedMenu: MenuState.planning,
-      ),
+      bottomNavigationBar: test == "start"
+          ? null
+          : CustomBottomNavBar(
+              selectedMenu: MenuState.planning,
+            ),
       body: SingleChildScrollView(
           child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
+            test == "start"
+                ? Container(
+                    width: double.infinity,
+                    child: Text(
+                      'étape 2/2',
+                      textAlign: TextAlign.end,
+                      style: normalStyleText,
+                    ),
+                  )
+                : Text(''),
+            SizedBox(height: 10),
             Text(
               'Vous pouvez ajouter une nouvelle prestation à tous moment.',
               style: normalStyleText,
             ),
-            SizedBox(height: 20),
-            Prestation(),
-            SizedBox(height: 10),
-            Prestation(),
-            SizedBox(height: 10),
-            Prestation(),
-            SizedBox(height: 10),
-            Prestation(),
-            SizedBox(height: 20),
+            test == "start" ? SizedBox(height: 20) : Text(''),
+            test == "start" ? SizedBox() : Prestation(),
+            test == "start" ? SizedBox() : SizedBox(height: 10),
+            test == "start" ? SizedBox() : Prestation(),
+            test == "start" ? SizedBox() : SizedBox(height: 10),
+            test == "start" ? SizedBox() : Prestation(),
+            test == "start" ? SizedBox() : SizedBox(height: 10),
+            test == "start" ? SizedBox() : Prestation(),
+            test == "start" ? SizedBox() : SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 20),
               child: SizedBox(
                 width: double.infinity,
                 height: buttonHeight,
@@ -70,12 +87,45 @@ class PrestationScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              AjoutPrestationScreen(test: test)),
+                    );
                     Get.offNamed('/coiffeuse/addprestations');
                     //  Navigator.push(context, MaterialPageRoute(builder: (context) => Acceuil()));
                   },
                 ),
               ),
             ),
+            test == "start"
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: SizedBox(
+                      width: width * 8,
+                      child: FlatButton(
+                          child: Text(
+                            'continuer'.toUpperCase(),
+                            style:
+                                TextStyle(color: kSecondaryColor, fontSize: 16),
+                          ),
+                          color: kPrimaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => WelcomePageScreen()),
+                            );
+                            // Validate will return true if the form is valid, or false if
+                            // the form is invalid.
+                          }),
+                    ),
+                  )
+                : Text('')
           ],
         ),
       )),
