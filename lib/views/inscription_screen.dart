@@ -573,22 +573,16 @@ class _InscriptionScreenState extends State<InscriptionScreen> {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),
-                                    onPressed: () {
+                                    onPressed: () async {
                                       // Validate will return true if the form is valid, or false if
                                       // the form is invalid.
-                                      _userServices
-                                          .signInWithFacebook()
-                                          .then((UserCredential value) {
-                                        Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    AccueilCoffeuse()),
-                                            (route) => false);
-                                      }).catchError((onError) {
-                                        print("pas ok");
-                                        print(onError);
-                                      });
+                                      var test = await _userServices
+                                          .signInWithFacebook();
+                                      print('Facebook status ${test!.status}');
+                                      //     .then().catchError((onError) {
+                                      //   print("pas ok");
+                                      //   print(onError);
+                                      // });
                                     },
                                   ),
                                 ),

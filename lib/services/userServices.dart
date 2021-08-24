@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:bigoodee/constants.dart';
+import 'package:bigoodee/helpers/resource.dart';
 import 'package:bigoodee/models/error_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -68,6 +69,28 @@ class UserServices {
     return message;
   }
 
+  Future<Resource?> signInWithFacebook() async {
+    try {
+      final LoginResult result = await FacebookAuth.instance.login();
+      switch (result.status) {
+        case LoginStatus.success:
+          final AuthCredential facebookCredential =
+              FacebookAuthProvider.credential(result.accessToken!.token);
+          final userCredential =
+              await _auth.signInWithCredential(facebookCredential);
+          return Resource(status: Status.Success);
+        case LoginStatus.cancelled:
+          return Resource(status: Status.Cancelled);
+        case LoginStatus.failed:
+          return Resource(status: Status.Error);
+        default:
+          return null;
+      }
+    } on FirebaseAuthException catch (e) {
+      throw e;
+    }
+  }
+
   Future<String> getRole(id) async {
     String url = apiURL + "/api/Users/role/" + id;
     String res = "";
@@ -127,15 +150,15 @@ class UserServices {
 //   }
 // }
 
-  Future<UserCredential> signInWithFacebook() async {
-    // Trigger the sign-in flow
-    final LoginResult loginResult = await FacebookAuth.instance.login();
+  // Future<UserCredential> signInWithFacebook() async {
+  //   // Trigger the sign-in flow
+  //   final LoginResult loginResult = await FacebookAuth.instance.login();
 
-    // Create a credential from the access token
-    final OAuthCredential facebookAuthCredential =
-        FacebookAuthProvider.credential(loginResult.accessToken!.token);
+  //   // Create a credential from the access token
+  //   final OAuthCredential facebookAuthCredential =
+  //       FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
-    // Once signed in, return the UserCredential
-    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
-  }
+  //   // Once signed in, return the UserCredential
+  //   return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+  // }
 }

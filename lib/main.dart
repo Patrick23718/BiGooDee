@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bigoodee/constants.dart';
 import 'package:bigoodee/helpers/local_storage.dart';
 import 'package:bigoodee/services/userServices.dart';
@@ -10,6 +12,7 @@ import 'package:bigoodee/views/coiffeuses/register_coiffeuse_screen.dart';
 import 'package:bigoodee/views/coiffeuses/welcome_screen.dart';
 import 'package:bigoodee/views/inscription_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:bigoodee/views/coiffeuses/ajout_prestation.dart';
 import 'package:bigoodee/views/coiffeuses/discussions.dart';
@@ -30,23 +33,25 @@ import 'package:flutter/material.dart';
 import 'package:bigoodee/views/homepage.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:path_provider/path_provider.dart' as pathProvider;
 
-late int test;
+late String test;
 const String LOCAL_STEPPERS_COMPLETED = "initApp";
 UserServices _userServices = UserServices();
 
 User? user;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // MySharedPreferences local = MySharedPreferences.instance;
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setInt(LOCAL_STEPPERS_COMPLETED, 1);
-  test = prefs.getInt(LOCAL_STEPPERS_COMPLETED)!;
-  // MySharedPreferences();
-  // local.setIntegerValue(LOCAL_STEPPERS_COMPLETED, 1);
-  // test = await local.getIntegerValue(LOCAL_STEPPERS_COMPLETED);
-  print('les tests $test');
+  // var box = Hive.box('bigoodee');
+  // Directory directory = await pathProvider.getApplicationDocumentsDirectory();
+  // Hive.init(directory.path);
+  // var box = await Hive.openBox('bigoodee');
+
+  // box.put(LOCAL_STEPPERS_COMPLETED, '1');
+  // var name = box.get(LOCAL_STEPPERS_COMPLETED);
+
+  // print('Name: $name');
+
   await Firebase.initializeApp();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: kPrimaryColor,
@@ -66,7 +71,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Bigoodee',
       debugShowCheckedModeBanner: false,
-      initialRoute: '/coiffeuse/home',
+      initialRoute: '/connexion',
       getPages: [
         GetPage(name: '/', page: () => onBoardingScreen()),
         GetPage(name: '/welcome', page: () => WelcomeScreen()),
