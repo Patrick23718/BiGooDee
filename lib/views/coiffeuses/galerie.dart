@@ -1,12 +1,37 @@
 import 'package:bigoodee/constants.dart';
 import 'package:bigoodee/enums.dart';
 import 'package:bigoodee/helpers/coustom_bottom_nav_bar.dart';
+import 'package:bigoodee/helpers/functions.dart';
+import 'package:bigoodee/services/galerieServices.dart';
+import 'package:bigoodee/services/userServices.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
-class GalerieScreen extends StatelessWidget {
+class GalerieScreen extends StatefulWidget {
   const GalerieScreen({Key? key}) : super(key: key);
+
+  @override
+  _GalerieScreenState createState() => _GalerieScreenState();
+}
+
+class _GalerieScreenState extends State<GalerieScreen> {
+  UserServices _userServices = UserServices();
+  GalerieService _galerieService = GalerieService();
+
+  User? user;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    user = _userServices.getUser();
+    // if (user == null) {
+    //   Get.offAllNamed('/connexion');
+    // }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +99,42 @@ class GalerieScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     onPressed: () {
-                      Get.offNamed('/coiffeuse/home');
+                      Get.bottomSheet(
+                          Container(
+                            child: Wrap(children: [
+                              ListTile(
+                                leading: Icon(Icons.camera_alt_outlined),
+                                title: Text(
+                                  'Appareil Photo',
+                                  style: TextStyle(
+                                    fontSize:
+                                        textRegularP1, //getProportionateScreenWidth(28),
+                                    color: kTextTitleColor,
+                                  ),
+                                ),
+                                onTap: () async {
+                                  var pickedFile = _galerieService.getImage(
+                                      ImageSource.camera, user!.uid);
+                                },
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.image),
+                                title: Text(
+                                  'Galérie',
+                                  style: TextStyle(
+                                    fontSize:
+                                        textRegularP1, //getProportionateScreenWidth(28),
+                                    color: kTextTitleColor,
+                                  ),
+                                ),
+                                onTap: () async {
+                                  var pickedFile = _galerieService.getImage(
+                                      ImageSource.gallery, user!.uid);
+                                },
+                              )
+                            ]),
+                          ),
+                          backgroundColor: kSecondaryColor);
                       //  Navigator.push(context, MaterialPageRoute(builder: (context) => Acceuil()));
                     },
                   ),

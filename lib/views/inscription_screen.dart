@@ -576,10 +576,17 @@ class _InscriptionScreenState extends State<InscriptionScreen> {
                                     onPressed: () async {
                                       // Validate will return true if the form is valid, or false if
                                       // the form is invalid.
-                                      var test = await _userServices
-                                          .signInWithFacebook();
-                                      print('Facebook status ${test!.status}');
-                                      //     .then().catchError((onError) {
+                                      try {
+                                        var test = await _userServices
+                                            .signInWithFacebook();
+                                        print(
+                                            'Facebook status ${test!.status}');
+                                        //     .then().catchError((onError) {
+
+                                        Get.offAllNamed('/cliente/accueil');
+                                      } catch (err) {
+                                        print(' err $err');
+                                      }
                                       //   print("pas ok");
                                       //   print(onError);
                                       // });

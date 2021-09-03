@@ -64,6 +64,8 @@ class _FogotPassScreenState extends State<FogotPassScreen> {
               title: Text(
                 'Reinitialisation de mot de passe',
                 style: headingStyle,
+                textAlign: TextAlign.center,
+                maxLines: 2,
               ),
               leading: SizedBox(
                 width: 0,

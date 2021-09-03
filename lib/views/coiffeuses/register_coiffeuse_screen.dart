@@ -707,6 +707,7 @@ class _RegisterCoiffeuseScreenState extends State<RegisterCoiffeuseScreen> {
                                       // the form is invalid.
                                       var test = await _userServices
                                           .signInWithFacebook();
+                                      Get.offAllNamed('/coiffeuse/home');
                                       print('Facebook status $test');
                                       //     .then().catchError((onError) {
                                       //   print("pas ok");

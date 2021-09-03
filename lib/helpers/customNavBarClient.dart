@@ -58,13 +58,12 @@ class CustomBottomNavBarClient extends StatelessWidget {
               ),
               IconButton(
                   icon: SvgPicture.asset(
-                    "icons/calendar.svg",
+                    "icons/tchat.svg",
                     color: MenuState.planning == selectedMenu
                         ? kPrimaryColor
                         : null,
                   ),
                   onPressed: () => {
-                        Get.toNamed('/coiffeuse/planning'),
                         // token = storage.getItem('token'),
                         // if(token == ""){
                         //   Navigator.pushNamed(context, SignInScreen.routeName),
@@ -74,12 +73,11 @@ class CustomBottomNavBarClient extends StatelessWidget {
                       }),
               IconButton(
                 icon: SvgPicture.asset(
-                  "icons/tchat.svg",
+                  "icons/cart.svg",
                   color:
                       MenuState.message == selectedMenu ? kPrimaryColor : null,
                 ),
                 onPressed: () {
-                  Get.offNamed('/coiffeuse/message');
                   //Navigator.pushNamed(context, SignInScreen.routeName);
                 },
               ),
@@ -91,7 +89,7 @@ class CustomBottomNavBarClient extends StatelessWidget {
                         : null,
                   ),
                   onPressed: () => {
-                        Get.toNamed('/coiffeuse/profile'),
+                        Get.toNamed('/cliente/profile'),
                       }),
             ],
           )),

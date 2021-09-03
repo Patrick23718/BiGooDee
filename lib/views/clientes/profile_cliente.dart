@@ -1,20 +1,21 @@
 import 'package:bigoodee/constants.dart';
 import 'package:bigoodee/enums.dart';
 import 'package:bigoodee/helpers/coustom_bottom_nav_bar.dart';
+import 'package:bigoodee/helpers/customNavBarClient.dart';
 import 'package:bigoodee/services/userServices.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+class ProfileClientScreen extends StatefulWidget {
+  const ProfileClientScreen({Key? key}) : super(key: key);
 
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  _ProfileClientScreenState createState() => _ProfileClientScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileClientScreenState extends State<ProfileClientScreen> {
   UserServices _userServices = UserServices();
 
   User? user;
@@ -34,7 +35,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     double width = MediaQuery.of(context).size.width / 12;
     double height = MediaQuery.of(context).size.height / 12;
     return Scaffold(
-      bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.profile),
+      bottomNavigationBar:
+          CustomBottomNavBarClient(selectedMenu: MenuState.profile),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -120,204 +122,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       Row(
                         children: <Widget>[
-                          SvgPicture.asset('icons/guide.svg'),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Text(
-                            'Mon guide coiffeuse',
-                            style: normalStyleText,
-                          ),
-                        ],
-                      ),
-                      Container(
-                        height: 35,
-                        width: 35,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: kPrimaryColor,
-                        ),
-                        child: Icon(
-                          Icons.play_arrow_outlined,
-                          color: Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              height: width * 1.8,
-              width: double.infinity,
-              margin: EdgeInsets.only(left: 10, right: 10),
-              decoration: BoxDecoration(
-                border: Border.all(color: kborderColor),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: InkWell(
-                onTap: () {
-                  Get.toNamed('/coiffeuse/prestations');
-                },
-                highlightColor: kPrimaryColor.withOpacity(0.2),
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: <Widget>[
-                          SvgPicture.asset('icons/prestationsicon.svg'),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Text(
-                            'Mes prestations',
-                            style: normalStyleText,
-                          ),
-                        ],
-                      ),
-                      Container(
-                        height: 35,
-                        width: 35,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: kPrimaryColor,
-                        ),
-                        child: Icon(
-                          Icons.play_arrow_outlined,
-                          color: Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              height: width * 1.8,
-              width: double.infinity,
-              margin: EdgeInsets.only(left: 10, right: 10),
-              decoration: BoxDecoration(
-                border: Border.all(color: kborderColor),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: InkWell(
-                onTap: () {
-                  Get.toNamed('/coiffeuse/galerie');
-                },
-                highlightColor: kPrimaryColor.withOpacity(0.2),
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(children: <Widget>[
-                        SvgPicture.asset('icons/galerie.svg'),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Text(
-                          'Ma galerie',
-                          style: normalStyleText,
-                        ),
-                      ]),
-                      Container(
-                        height: 35,
-                        width: 35,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: kPrimaryColor,
-                        ),
-                        child: Icon(
-                          Icons.play_arrow_outlined,
-                          color: Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              height: width * 1.8,
-              width: double.infinity,
-              margin: EdgeInsets.only(left: 10, right: 10),
-              decoration: BoxDecoration(
-                border: Border.all(color: kborderColor),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: InkWell(
-                onTap: () {
-                  Get.toNamed('/coiffeuse/portemonnaie');
-                },
-                highlightColor: kPrimaryColor.withOpacity(0.2),
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          SvgPicture.asset('icons/monnaie.svg'),
-                          SizedBox(
-                            width: 15,
-                          ),
-                          Text(
-                            'Mon porte monnaie',
-                            style: normalStyleText,
-                          ),
-                        ],
-                      ),
-                      Container(
-                        height: 35,
-                        width: 35,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: kPrimaryColor,
-                        ),
-                        child: Icon(
-                          Icons.play_arrow_outlined,
-                          color: Colors.white,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              height: width * 1.8,
-              width: double.infinity,
-              margin: EdgeInsets.only(left: 10, right: 10),
-              decoration: BoxDecoration(
-                border: Border.all(color: kborderColor),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: InkWell(
-                onTap: () {
-                  print('ok');
-                },
-                highlightColor: kPrimaryColor.withOpacity(0.2),
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: <Widget>[
                           SvgPicture.asset('icons/historique.svg'),
                           SizedBox(
                             width: 15,
@@ -368,7 +172,111 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       Row(
                         children: <Widget>[
-                          SvgPicture.asset('icons/contact.svg'),
+                          SvgPicture.asset('icons/inviter.svg'),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Text(
+                            'Inviter des amis',
+                            style: TextStyle(
+                              fontSize:
+                                  textRegularP1, //getProportionateScreenWidth(28),
+                              color: kTextColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 35,
+                        width: 35,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: kPrimaryColor,
+                        ),
+                        child: Icon(
+                          Icons.play_arrow_outlined,
+                          color: Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              height: width * 1.8,
+              width: double.infinity,
+              margin: EdgeInsets.only(left: 10, right: 10),
+              decoration: BoxDecoration(
+                border: Border.all(color: kborderColor),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: InkWell(
+                onTap: () {
+                  print('ok');
+                },
+                highlightColor: kPrimaryColor.withOpacity(0.2),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: <Widget>[
+                          SvgPicture.asset('icons/faq.svg'),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Text(
+                            'Questions fréquentes',
+                            style: normalStyleText,
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 35,
+                        width: 35,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: kPrimaryColor,
+                        ),
+                        child: Icon(
+                          Icons.play_arrow_outlined,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              height: width * 1.8,
+              width: double.infinity,
+              margin: EdgeInsets.only(left: 10, right: 10),
+              decoration: BoxDecoration(
+                border: Border.all(color: kborderColor),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: InkWell(
+                onTap: () {
+                  print('ok');
+                },
+                highlightColor: kPrimaryColor.withOpacity(0.2),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: <Widget>[
+                          SvgPicture.asset('icons/nouscont.svg'),
                           SizedBox(
                             width: 15,
                           ),
@@ -390,6 +298,56 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           color: Colors.white,
                         ),
                       )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              height: width * 1.8,
+              width: double.infinity,
+              margin: EdgeInsets.only(left: 10, right: 10),
+              decoration: BoxDecoration(
+                border: Border.all(color: kborderColor),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: InkWell(
+                onTap: () {
+                  Get.toNamed('/cliente/settings');
+                },
+                highlightColor: kPrimaryColor.withOpacity(0.2),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: <Widget>[
+                          SvgPicture.asset('icons/setting.svg'),
+                          SizedBox(
+                            width: 15,
+                          ),
+                          Text(
+                            'Paramètres',
+                            style: normalStyleText,
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 35,
+                        width: 35,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: kPrimaryColor,
+                        ),
+                        child: Icon(
+                          Icons.play_arrow_outlined,
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -431,9 +389,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     borderRadius: BorderRadius.circular(10),
                                   )),
                               onPressed: () {
-                                _userServices.signOut();
-                                _userServices.signOut();
-                                _userServices.signOut();
+                                UserServices().signOut();
                                 Get.offNamed('/connexion');
                               },
                             ),

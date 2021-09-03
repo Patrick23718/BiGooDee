@@ -6,19 +6,17 @@ import 'package:get/get.dart';
 class FirstMiddleware extends GetMiddleware {
   UserServices _userServices = UserServices();
   User? _user;
-  // String? role;
   @override
-  int? get priority => 2;
+  int? get priority => 4;
 
   bool isAuthenticated = false;
 
   @override
   RouteSettings? redirect(String? route) {
-    var role;
     _user = _userServices.getUser();
     if (_user != null) {
-      return RouteSettings(name: '/cliente/accueil');
-    } else {}
+      return RouteSettings(name: '/coiffeuse/home');
+    }
   }
 
   //This function will be called  before anything created we can use it to

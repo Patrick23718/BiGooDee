@@ -87,13 +87,11 @@ class PrestationScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              AjoutPrestationScreen(test: test)),
-                    );
-                    Get.offNamed('/coiffeuse/addprestations');
+                    if (test == "start") {
+                      Get.toNamed('/coiffeuse/addprestationsinit');
+                    } else {
+                      Get.toNamed('/coiffeuse/addprestations');
+                    }
                     //  Navigator.push(context, MaterialPageRoute(builder: (context) => Acceuil()));
                   },
                 ),

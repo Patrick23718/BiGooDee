@@ -28,7 +28,8 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
   UserServices _userServices = UserServices();
   bool isSignIn = false;
   FirebaseAuth _auth = FirebaseAuth.instance;
-  late User _user, users;
+  late User users;
+  User? _user;
   late String role;
   // FacebookLogin facebookLogin = FacebookLogin();
 
@@ -36,6 +37,10 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    // _user = _userServices.getUser();
+    // if (_user != null) {
+    //   Get.offAllNamed('/coiffeuse/home');
+    // }
     FNMail = FocusNode();
     FNPass = FocusNode();
   }
@@ -302,11 +307,12 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                                               color: kPrimaryColor,
                                             ));
                                         // Navigator.push(context, MaterialPageRoute(builder: (context) => ConfirmCompescreen(name: 'Nom de test')));
-                                        String user = await _userServices.auth(
+                                        User? user = await _userServices.auth(
                                             _emailController.text,
                                             _passController.text);
                                         _userServices.getUser();
-                                        if (user.split(' ')[0] == 'ok') {
+                                        if (user != null) {
+                                          print(user);
                                           // setState(() => {
                                           //       role = _userServices
                                           //           .getRole(user.split(' ')[1])
@@ -318,22 +324,9 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                                           // } else if (role == 'coiffeuse') {
                                           //   Get.offAllNamed('/coiffeuse/home');
                                           // }
-                                          Get.offAllNamed('/coiffeuse/home');
+                                          Get.offAllNamed('/cliente/accueil');
                                           Get.back();
-                                        } else {
-                                          var translation =
-                                              await GoogleTranslator()
-                                                  .translate(user,
-                                                      from: 'en', to: 'fr');
-                                          Get.back();
-                                          Get.snackbar(
-                                              'Validation', translation.text,
-                                              animationDuration:
-                                                  Duration(seconds: 3),
-                                              colorText: kSecondaryColor,
-                                              backgroundColor: kErrorAlertColor
-                                                  .withOpacity(0.4));
-                                        }
+                                        } else {}
                                       }
                                     },
                                   ),

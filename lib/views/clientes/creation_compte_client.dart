@@ -145,8 +145,8 @@ class _CreationCompteScreenState extends State<CreationCompteScreen> {
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: kPrimaryColor, width: 1.0)),
-                                  labelText: 'Nom',
-                                  hintText: 'Nom',
+                                  labelText: 'Prénom',
+                                  hintText: 'Prénom',
                                   labelStyle: TextStyle(
                                       color: myFocusNod.hasFocus
                                           ? kPrimaryColor
@@ -163,7 +163,7 @@ class _CreationCompteScreenState extends State<CreationCompteScreen> {
                                 ),
                                 validator: (String? value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Veuillez renseigner votre nom';
+                                    return 'Veuillez renseigner votre prénom';
                                   }
                                   return null;
                                 },

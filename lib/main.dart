@@ -2,10 +2,18 @@ import 'dart:io';
 
 import 'package:bigoodee/constants.dart';
 import 'package:bigoodee/helpers/local_storage.dart';
+import 'package:bigoodee/middlewares/Authenticated.dart';
 import 'package:bigoodee/services/userServices.dart';
 import 'package:bigoodee/theme.dart';
+import 'package:bigoodee/views/clientes/cgu_Screen.dart';
+import 'package:bigoodee/views/clientes/coiffeuse_prefere_screen.dart';
 import 'package:bigoodee/views/clientes/confirmation_compte_screen.dart';
+import 'package:bigoodee/views/clientes/gestion_mot_passe_screen.dart';
 import 'package:bigoodee/views/clientes/home_screen.dart';
+import 'package:bigoodee/views/clientes/paiement_screen.dart';
+import 'package:bigoodee/views/clientes/profile_cliente.dart';
+import 'package:bigoodee/views/clientes/settings_screen.dart';
+import 'package:bigoodee/views/coiffeuses/ajout_prestion_init_screen.dart';
 import 'package:bigoodee/views/coiffeuses/biographie_screen.dart';
 import 'package:bigoodee/views/coiffeuses/creation_compte_coiffeuse_screen.dart';
 import 'package:bigoodee/views/coiffeuses/register_coiffeuse_screen.dart';
@@ -34,14 +42,31 @@ import 'package:bigoodee/views/homepage.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
+import 'package:shared_preferences/shared_preferences.dart';
 
-late String test;
+late String? test;
 const String LOCAL_STEPPERS_COMPLETED = "initApp";
 UserServices _userServices = UserServices();
 
 User? user;
+
 void main() async {
+  setUpAll(() {
+    const MethodChannel('plugins.flutter.io/shared_preferences')
+        .setMockMethodCallHandler((MethodCall methodCall) async {
+      if (methodCall.method == 'getAll') {
+        return <String, dynamic>{}; // set initial values here if desired
+      }
+      return null;
+    });
+  });
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  test = prefs.getString(LOCAL_STEPPERS_COMPLETED);
+  prefs.setString(LOCAL_STEPPERS_COMPLETED, 'false');
+
+  print('Get $LOCAL_STEPPERS_COMPLETED As $test');
   // var box = Hive.box('bigoodee');
   // Directory directory = await pathProvider.getApplicationDocumentsDirectory();
   // Hive.init(directory.path);
@@ -52,7 +77,6 @@ void main() async {
 
   // print('Name: $name');
 
-  await Firebase.initializeApp();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: kPrimaryColor,
     statusBarIconBrightness: Brightness.light,
@@ -64,6 +88,8 @@ void main() async {
   runApp(MyApp());
 }
 
+void setUpAll(Null Function() param0) {}
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -71,7 +97,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Bigoodee',
       debugShowCheckedModeBanner: false,
-      initialRoute: '/connexion',
+      initialRoute: test == 'false' ? '/connexion' : '/',
       getPages: [
         GetPage(name: '/', page: () => onBoardingScreen()),
         GetPage(name: '/welcome', page: () => WelcomeScreen()),
@@ -82,12 +108,21 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(name: '/cliente/accueil', page: () => HomeClient()),
         GetPage(
-          name: '/connexion',
-          page: () => ConnexionScreen(),
-          /*, transition: Transition.lf*/
-        ),
+            name: '/connexion',
+            page: () => ConnexionScreen(),
+            middlewares: [FirstMiddleware()]
+            /*, transition: Transition.lf*/
+            ),
+        GetPage(name: '/cliente/profile', page: () => ProfileClientScreen()),
         GetPage(name: '/cliente/confirm', page: () => ConfirmCompescreen()),
         GetPage(name: '/cliente/register', page: () => InscriptionScreen()),
+        GetPage(name: '/cliente/settings', page: () => SettingsScreen()),
+        GetPage(name: '/cliente/cgu', page: () => CGUScreen()),
+        GetPage(name: '/cliente/paiement', page: () => PaiementScreen()),
+        GetPage(
+            name: '/cliente/passmanege', page: () => GestionMotPasseScreen()),
+        GetPage(
+            name: '/client/whistlist', page: () => CoiffeusePrefereScreen()),
         GetPage(name: '/creation', page: () => CreationCompteScreen()),
         GetPage(
             name: '/creation-coiffeuse',
@@ -105,6 +140,9 @@ class MyApp extends StatelessWidget {
         GetPage(
             name: '/coiffeuse/addprestations',
             page: () => AjoutPrestationScreen()),
+        GetPage(
+            name: '/coiffeuse/addprestationsinit',
+            page: () => AjoutPrestationInitScreen()),
         GetPage(
             name: '/coiffeuse/notifications', page: () => NotificationScreen()),
         GetPage(

@@ -7,15 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class AjoutPrestationScreen extends StatefulWidget {
+class AjoutPrestationInitScreen extends StatefulWidget {
   final String? test;
-  const AjoutPrestationScreen({Key? key, this.test}) : super(key: key);
+  const AjoutPrestationInitScreen({Key? key, this.test}) : super(key: key);
 
   @override
-  _AjoutPrestationScreenState createState() => _AjoutPrestationScreenState();
+  _AjoutPrestationInitScreenState createState() =>
+      _AjoutPrestationInitScreenState();
 }
 
-class _AjoutPrestationScreenState extends State<AjoutPrestationScreen> {
+class _AjoutPrestationInitScreenState extends State<AjoutPrestationInitScreen> {
   late FocusNode FNMail;
 
   @override
@@ -63,9 +64,6 @@ class _AjoutPrestationScreenState extends State<AjoutPrestationScreen> {
             backgroundColor: Colors.transparent,
             bottomOpacity: 0,
             elevation: 0,
-          ),
-          bottomNavigationBar: CustomBottomNavBar(
-            selectedMenu: MenuState.planning,
           ),
           body: SingleChildScrollView(
               child: Padding(
@@ -268,8 +266,7 @@ class _AjoutPrestationScreenState extends State<AjoutPrestationScreen> {
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       onPressed: () {
-                                        Get.offNamed(
-                                            '/coiffeuse/addprestations');
+                                        Get.back();
                                         //  Navigator.push(context, MaterialPageRoute(builder: (context) => Acceuil()));
                                       },
                                     ),

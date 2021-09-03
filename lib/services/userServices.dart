@@ -9,6 +9,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 // import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
+import 'package:translator/translator.dart';
 
 class UserServices {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -20,6 +21,8 @@ class UserServices {
       tel.substring(1);
     }
     try {
+      signOut();
+      signOut();
       const url = apiURL + "/api/Users";
       Map data = {};
       if (role == 'coiffeuse') {
@@ -54,7 +57,7 @@ class UserServices {
         // var jsonMap = json.decode(jsonString);
         // print("rceived JSON map: $jsonMap");
         message = "ok";
-        String test = await auth(email, pass);
+        await auth(email, pass);
       } else {
         var jsonString = response.body;
         var jsonMap = json.decode(jsonString);
@@ -71,7 +74,10 @@ class UserServices {
 
   Future<Resource?> signInWithFacebook() async {
     try {
+      signOut();
+      signOut();
       final LoginResult result = await FacebookAuth.instance.login();
+      print('result ${result.message}');
       switch (result.status) {
         case LoginStatus.success:
           final AuthCredential facebookCredential =
@@ -91,36 +97,43 @@ class UserServices {
     }
   }
 
-  Future<String> getRole(id) async {
-    String url = apiURL + "/api/Users/role/" + id;
-    String res = "";
-    print(url.toString());
-    var response = await http.get(Uri.parse(url));
-    res = response.body.toString();
-    print(res);
-    return res;
-  }
+  // getRole(id) async {
+  //   String url = apiURL + "/api/Users/role/" + id;
+  //   String res = "";
+  //   // print(url.toString());
+  //   var response = await http.get(Uri.parse(url));
+  //   res = response.body;
+  //   print(res);
+  //   return res;
+  // }
 
-  Future<String> auth(email, password) async {
+  Future<User?> auth(email, password) async {
     // var email = "noukimi.patrick@gmail.com";
     // var password = "test1234";
     String test = "";
+    User? user;
+
     try {
+      signOut();
+      signOut();
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-
       // print("Les credentials sont $userCredential");
-
+      user = userCredential.user;
       test = "ok " + userCredential.user!.uid;
     } on FirebaseAuthException catch (err) {
       // print("Les erreurs: $err");
       test = err.message!;
+      var translation =
+          await GoogleTranslator().translate(test, from: 'en', to: 'fr');
+      Get.back();
+      Get.snackbar('Validation', translation.text,
+          animationDuration: Duration(seconds: 3),
+          colorText: kSecondaryColor,
+          backgroundColor: kErrorAlertColor.withOpacity(0.4));
       print(test);
-      // test = err;
-      //   var error = ErrorModel.fromJson();
-      // return err.message.split(" - ")[1]
     }
-    return test;
+    return user;
   }
 
   User? getUser() {
@@ -137,6 +150,8 @@ class UserServices {
 
   void signOut() async {
     await _auth.signOut();
+
+    Get.offNamed('/connexion');
   }
 
 //   Future<UserCredential> signInWithFacebook() async{
