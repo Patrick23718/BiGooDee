@@ -162,7 +162,7 @@ class _ProfileClientScreenState extends State<ProfileClientScreen> {
               ),
               child: InkWell(
                 onTap: () {
-                  print('ok');
+                  Get.toNamed('/cliente/invitation');
                 },
                 highlightColor: kPrimaryColor.withOpacity(0.2),
                 child: Container(
@@ -266,7 +266,7 @@ class _ProfileClientScreenState extends State<ProfileClientScreen> {
               ),
               child: InkWell(
                 onTap: () {
-                  print('ok');
+                  Get.toNamed('/cliente/contact');
                 },
                 highlightColor: kPrimaryColor.withOpacity(0.2),
                 child: Container(

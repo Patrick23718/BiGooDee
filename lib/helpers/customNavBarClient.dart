@@ -59,11 +59,12 @@ class CustomBottomNavBarClient extends StatelessWidget {
               IconButton(
                   icon: SvgPicture.asset(
                     "icons/tchat.svg",
-                    color: MenuState.planning == selectedMenu
+                    color: MenuState.message == selectedMenu
                         ? kPrimaryColor
                         : null,
                   ),
                   onPressed: () => {
+                        Get.toNamed('/cliente/tchat'),
                         // token = storage.getItem('token'),
                         // if(token == ""){
                         //   Navigator.pushNamed(context, SignInScreen.routeName),
@@ -75,7 +76,7 @@ class CustomBottomNavBarClient extends StatelessWidget {
                 icon: SvgPicture.asset(
                   "icons/cart.svg",
                   color:
-                      MenuState.message == selectedMenu ? kPrimaryColor : null,
+                      MenuState.planning == selectedMenu ? kPrimaryColor : null,
                 ),
                 onPressed: () {
                   //Navigator.pushNamed(context, SignInScreen.routeName);

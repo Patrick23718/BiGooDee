@@ -71,63 +71,7 @@ class PaiementScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  onPressed: () async {
-                    showDialog(
-                      context: context,
-                      useSafeArea: true,
-                      builder: (BuildContext context) {
-                        return Expanded(
-                          flex: 10,
-                          child: AlertDialog(
-                            scrollable: true,
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(
-                                  width: 18,
-                                ),
-                                Text(
-                                  'Données Banquaires',
-                                  style: TextStyle(
-                                      fontSize: textRegularH2,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                IconButton(
-                                  onPressed: () => Get.back(),
-                                  icon: SvgPicture.asset('icons/close.svg'),
-                                )
-                              ],
-                            ),
-                            content: Text('GeeksforGeeks'),
-                            actions: [
-                              SizedBox(
-                                width: double.infinity,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: FlatButton(
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 15),
-                                        child: Text(
-                                          'Ajouter ma carte'.toUpperCase(),
-                                          style: TextStyle(
-                                              color: kSecondaryColor,
-                                              fontSize: 16),
-                                        ),
-                                      ),
-                                      color: kPrimaryColor,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      onPressed: () async {}),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  },
+                  onPressed: () async {},
                 ),
               ),
             ],

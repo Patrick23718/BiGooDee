@@ -4,6 +4,7 @@ import 'package:bigoodee/constants.dart';
 import 'package:bigoodee/enums.dart';
 import 'package:bigoodee/helpers/coustom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -18,6 +19,31 @@ class AjoutPrestationInitScreen extends StatefulWidget {
 
 class _AjoutPrestationInitScreenState extends State<AjoutPrestationInitScreen> {
   late FocusNode FNMail;
+  List<String> prestations = [
+    "braids",
+    "fulani braids",
+    "vanilles (twista)",
+    "CORNROWS",
+    "NAttes collées",
+    "fulani braids",
+    "BANTU KNOTS",
+    "SENEGALESE TWIST",
+    "PIQUÉS LÂCHÉS",
+    "crochet braids",
+    "TISSAGES",
+    "FAUSSES LOCKS",
+    "LISSAGES",
+    "soins",
+    "lace frontal",
+    "brushing",
+    "tresses enfants",
+    "coupes",
+    "chignon",
+    "coupes enfants",
+    "balayage",
+    "locks",
+    "pose perruque",
+  ];
 
   @override
   void initState() {
@@ -42,6 +68,7 @@ class _AjoutPrestationInitScreenState extends State<AjoutPrestationInitScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height / 12;
     int _ratingController = 1;
     double width = MediaQuery.of(context).size.width / 12;
     return GestureDetector(
@@ -120,24 +147,49 @@ class _AjoutPrestationInitScreenState extends State<AjoutPrestationInitScreen> {
                                             SizedBox(
                                               height: 20,
                                             ),
-                                            InputPrestation(
-                                              text: 'FULANI BRAIDS',
+                                            Container(
+                                              height: height * 6,
+                                              child: StaggeredGridView
+                                                  .countBuilder(
+                                                      crossAxisCount: 1,
+                                                      shrinkWrap: true,
+                                                      itemCount:
+                                                          prestations.length,
+                                                      mainAxisSpacing: 5,
+                                                      crossAxisSpacing: 5,
+                                                      itemBuilder:
+                                                          (context, index) {
+                                                        return InputPrestation(
+                                                          text: prestations[
+                                                                  index]
+                                                              .toUpperCase(),
+                                                        );
+                                                      },
+                                                      staggeredTileBuilder:
+                                                          (index) =>
+                                                              StaggeredTile.fit(
+                                                                  1)),
                                             ),
+                                            // InputPrestation(
+                                            //   text: 'FULANI BRAIDS',
+                                            // ),
+                                            // SizedBox(
+                                            //   height: inputInterligne,
+                                            // ),
+                                            // InputPrestation(
+                                            //     text: 'VANILLES'),
+                                            // SizedBox(
+                                            //   height: inputInterligne,
+                                            // ),
+                                            // InputPrestation(
+                                            //     text: 'CORNROWS'),
+                                            // SizedBox(
+                                            //   height: inputInterligne,
+                                            // ),
+                                            // InputPrestation(
+                                            //     text: 'BANTU KNOTS'),
                                             SizedBox(
-                                              height: inputInterligne,
-                                            ),
-                                            InputPrestation(text: 'VANILLES'),
-                                            SizedBox(
-                                              height: inputInterligne,
-                                            ),
-                                            InputPrestation(text: 'CORNROWS'),
-                                            SizedBox(
-                                              height: inputInterligne,
-                                            ),
-                                            InputPrestation(
-                                                text: 'BANTU KNOTS'),
-                                            SizedBox(
-                                              height: inputInterligne,
+                                              height: 10,
                                             ),
                                             Padding(
                                               padding:

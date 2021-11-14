@@ -18,9 +18,17 @@ class RegisterCoiffeuseScreen extends StatefulWidget {
 }
 
 class _RegisterCoiffeuseScreenState extends State<RegisterCoiffeuseScreen> {
-  late FocusNode FNVille, FNBiographie, FNNom, FNTel, FNMail, FNPass, FNPassCon;
+  late FocusNode FNVille,
+      FNBiographie,
+      FNNom,
+      FNPrenom,
+      FNTel,
+      FNMail,
+      FNPass,
+      FNPassCon;
 
   final _nomController = TextEditingController();
+  final _prenomController = TextEditingController();
   final _telController = TextEditingController();
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
@@ -30,7 +38,7 @@ class _RegisterCoiffeuseScreenState extends State<RegisterCoiffeuseScreen> {
   @override
   void initState() {
     // TODO: implement initState
-
+    FNPrenom = FocusNode();
     FNMail = FocusNode();
     FNPass = FocusNode();
     FNPassCon = FocusNode();
@@ -43,6 +51,7 @@ class _RegisterCoiffeuseScreenState extends State<RegisterCoiffeuseScreen> {
 
   @override
   void dispose() {
+    FNPrenom.dispose();
     FNMail.dispose();
     FNPass.dispose();
     FNPassCon.dispose();
@@ -59,6 +68,12 @@ class _RegisterCoiffeuseScreenState extends State<RegisterCoiffeuseScreen> {
   void _requestFocusVille() {
     setState(() {
       FocusScope.of(context).requestFocus(FNVille);
+    });
+  }
+
+  void _requestFocusPrenom() {
+    setState(() {
+      FocusScope.of(context).requestFocus(FNPrenom);
     });
   }
 
@@ -190,6 +205,60 @@ class _RegisterCoiffeuseScreenState extends State<RegisterCoiffeuseScreen> {
                                 validator: (String? value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Veuillez renseigner votre nom';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              SizedBox(height: 20),
+                              TextFormField(
+                                controller: _prenomController,
+                                focusNode: FNPrenom,
+                                onTap: _requestFocusPrenom,
+                                cursorColor: kTextColor,
+                                style: TextStyle(
+                                  color: kTextColor,
+                                ),
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: kPrimaryColor, width: 1.0)),
+                                    labelText: 'prénom',
+                                    hintText: 'Prénom',
+                                    labelStyle: TextStyle(
+                                        color: FNPrenom.hasFocus
+                                            ? kPrimaryColor
+                                            : kTextOnlyColor //FocusScope.of(context).hasFocus ? kPrimaryColor : kTextOnlyColor
+                                        ),
+                                    hintStyle: TextStyle(
+                                      fontSize: textRegularP1,
+                                      color: kTextOnlyColor,
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                    ),
+                                    suffixIcon: Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: Material(
+                                        color: kPrimaryColor,
+                                        elevation: 2.0,
+                                        shadowColor: kPrimaryColor,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20)),
+                                        child: Icon(Icons.person,
+                                            size: 20, color: kSecondaryColor),
+                                      ),
+                                    ),
+                                    suffixIconConstraints: BoxConstraints(
+                                        minHeight: 35, minWidth: 45)
+                                    //child: Icon(Icons.alternate_email, size: 24, color: kSecondaryColor),
+
+                                    ),
+                                validator: (String? value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Veuillez renseigner votre prénom';
                                   }
                                   return null;
                                 },

@@ -324,7 +324,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                                           // } else if (role == 'coiffeuse') {
                                           //   Get.offAllNamed('/coiffeuse/home');
                                           // }
-                                          Get.offAllNamed('/cliente/accueil');
+                                          Get.offAllNamed('/coiffeuse/home');
                                           Get.back();
                                         } else {}
                                       }

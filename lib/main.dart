@@ -1,27 +1,28 @@
 import 'dart:io';
 
 import 'package:bigoodee/constants.dart';
-import 'package:bigoodee/helpers/local_storage.dart';
 import 'package:bigoodee/middlewares/Authenticated.dart';
 import 'package:bigoodee/services/userServices.dart';
 import 'package:bigoodee/theme.dart';
 import 'package:bigoodee/views/clientes/cgu_Screen.dart';
 import 'package:bigoodee/views/clientes/coiffeuse_prefere_screen.dart';
+import 'package:bigoodee/views/clientes/conctact_screen.dart';
 import 'package:bigoodee/views/clientes/confirmation_compte_screen.dart';
 import 'package:bigoodee/views/clientes/gestion_mot_passe_screen.dart';
 import 'package:bigoodee/views/clientes/home_screen.dart';
+import 'package:bigoodee/views/clientes/invitation_screen.dart';
 import 'package:bigoodee/views/clientes/paiement_screen.dart';
 import 'package:bigoodee/views/clientes/profile_cliente.dart';
 import 'package:bigoodee/views/clientes/settings_screen.dart';
+import 'package:bigoodee/views/clientes/tchat.dart';
 import 'package:bigoodee/views/coiffeuses/ajout_prestion_init_screen.dart';
 import 'package:bigoodee/views/coiffeuses/biographie_screen.dart';
 import 'package:bigoodee/views/coiffeuses/creation_compte_coiffeuse_screen.dart';
 import 'package:bigoodee/views/coiffeuses/register_coiffeuse_screen.dart';
 import 'package:bigoodee/views/coiffeuses/welcome_screen.dart';
 import 'package:bigoodee/views/inscription_screen.dart';
+import 'package:bigoodee/views/search_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:hive/hive.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:bigoodee/views/coiffeuses/ajout_prestation.dart';
 import 'package:bigoodee/views/coiffeuses/discussions.dart';
 import 'package:bigoodee/views/coiffeuses/etre_Coiffeuse.dart';
@@ -38,10 +39,8 @@ import 'package:bigoodee/views/onboarding_screen.dart';
 import 'package:bigoodee/views/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:bigoodee/views/homepage.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart' as pathProvider;
 import 'package:shared_preferences/shared_preferences.dart';
 
 late String? test;
@@ -55,6 +54,9 @@ void main() async {
     const MethodChannel('plugins.flutter.io/shared_preferences')
         .setMockMethodCallHandler((MethodCall methodCall) async {
       if (methodCall.method == 'getAll') {
+        return <String, dynamic>{}; // set initial values here if desired
+      }
+      if (methodCall.method == 'canLaunch') {
         return <String, dynamic>{}; // set initial values here if desired
       }
       return null;
@@ -113,12 +115,16 @@ class MyApp extends StatelessWidget {
             middlewares: [FirstMiddleware()]
             /*, transition: Transition.lf*/
             ),
+        GetPage(name: '/search', page: () => SearchScreen()),
         GetPage(name: '/cliente/profile', page: () => ProfileClientScreen()),
         GetPage(name: '/cliente/confirm', page: () => ConfirmCompescreen()),
         GetPage(name: '/cliente/register', page: () => InscriptionScreen()),
         GetPage(name: '/cliente/settings', page: () => SettingsScreen()),
         GetPage(name: '/cliente/cgu', page: () => CGUScreen()),
         GetPage(name: '/cliente/paiement', page: () => PaiementScreen()),
+        GetPage(name: '/cliente/tchat', page: () => Tchat()),
+        GetPage(name: '/cliente/contact', page: () => ContactScreen()),
+        GetPage(name: '/cliente/invitation', page: () => InvitationScreen()),
         GetPage(
             name: '/cliente/passmanege', page: () => GestionMotPasseScreen()),
         GetPage(

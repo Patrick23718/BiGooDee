@@ -13,29 +13,29 @@ String prestationToJson(List<Prestation> data) =>
 
 class Prestation {
   Prestation({
-    required this.id,
+    this.id,
     required this.nom,
-    required this.rate,
+    this.rate,
     required this.typePrestation,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.v,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
   });
 
-  String id;
+  String? id;
   String nom;
-  int rate;
-  List<TypePrestation> typePrestation;
-  DateTime createdAt;
-  DateTime updatedAt;
-  int v;
+  int? rate;
+  List<TypePrestations> typePrestation;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  int? v;
 
   factory Prestation.fromJson(Map<String, dynamic> json) => Prestation(
         id: json["_id"],
         nom: json["nom"],
         rate: json["rate"],
-        typePrestation: List<TypePrestation>.from(
-            json["typePrestation"].map((x) => TypePrestation.fromJson(x))),
+        typePrestation: List<TypePrestations>.from(
+            json["typePrestation"].map((x) => TypePrestations.fromJson(x))),
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"],
@@ -47,24 +47,25 @@ class Prestation {
         "rate": rate,
         "typePrestation":
             List<dynamic>.from(typePrestation.map((x) => x.toJson())),
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
+        "createdAt": createdAt!.toIso8601String(),
+        "updatedAt": updatedAt!.toIso8601String(),
         "__v": v,
       };
 }
 
-class TypePrestation {
-  TypePrestation({
+class TypePrestations {
+  TypePrestations({
     required this.nom,
     required this.photoUrl,
-    required this.id,
+    this.id,
   });
 
   String nom;
   String photoUrl;
-  String id;
+  String? id;
 
-  factory TypePrestation.fromJson(Map<String, dynamic> json) => TypePrestation(
+  factory TypePrestations.fromJson(Map<String, dynamic> json) =>
+      TypePrestations(
         nom: json["nom"],
         photoUrl: json["photoURL"],
         id: json["_id"],
